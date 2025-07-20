@@ -1,0 +1,157 @@
+<html lang="en">
+    <h4><title>Culinary Canopy</title></h4>
+    <head>
+        <style>
+            
+            body {
+      font-family: 'Calibri, MS', sans-serif;
+      margin: 0;
+      background: #fdfaf6;
+    }
+    header {
+      background: #c0621efe;
+      color: rgb(244, 236, 172);
+      padding: 20px;
+      text-align: center;
+    }
+    h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+    }
+    .category {
+      padding: 20px;
+    }
+    .subcategory {
+      margin-top: 15px;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 10px;
+    }
+    .menu-item {
+      background: rgb(244, 236, 172);
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .menu-item h4 {
+      margin: 0 0 5px;
+    }
+    .price {
+      color: #e67e22;
+      font-weight: bold;
+    }            
+        </style>
+    </head>
+
+    </style>
+</head>
+<body>
+  <header>
+    <h1><img src="gif files/restaurant.gif" width="333" align="left"></h1><p><h1 align="left">Culinary Canopy<img src="culinary.png" width="333" align="right"></h1></p>
+    <h2><marquee font-color="black" >Welcome to the official Web-Menu of Culinary Canopy</marquee></h2>
+    <p align="left">Order your favorite dishes online: Web_Site:- &nbsp;&nbsp;&nbsp;<a href="file:///C:/Users/Souvik%20Sarkar/OneDrive/Documents/internship/restaurant_order.html">file:///C:/Users/Souvik%20Sarkar/OneDrive/Documents/internship/restaurant_order.html</a></p>
+    <marquee>Contact Us : culinarycanopy@gmail.com <span style="margin-left: 350px;">Ph. : 77777 77777</span><span style="margin-left: 350px;">Wp : 66666 66666</span></marquee>
+  </header>
+
+  <section class="category">
+    <h2>Starters</h2>
+    <div class="subcategory">
+      <h4><u>Veg Starters</u></h4>
+      <div class="menu-grid" id="veg-starters"></div>
+    </div>
+    <div class="subcategory">
+      <h4><u>Non-Veg Starters</u></h4>
+      <div class="menu-grid" id="nonveg-starters"></div>
+    </div>
+  </section>
+
+  <section class="category">
+    <h2>Main Course</h2>
+    <div class="subcategory">
+      <h4><u>Veg Dishes</u></h4>
+      <div class="menu-grid" id="veg-main"></div>
+    </div>
+    <div class="subcategory">
+      <h4><u>Chicken Dishes</u></h4>
+      <div class="menu-grid" id="chicken-main"></div>
+    </div>
+    <div class="subcategory">
+      <h4><u>Fish Dishes</u></h4>
+      <div class="menu-grid" id="fish-main"></div>
+    </div>
+  <div class="subcategory">
+      <h4><u>Egg Dishes</u></h4>
+      <div class="menu-grid" id="egg-main"></div>
+    </div>
+  </section>
+
+
+  <section class="category">
+    <h2>Desserts</h2>
+    <div class="menu-grid" id="desserts"></div>
+  </section>
+    
+  <script>
+    const menuData = {
+      'veg-starters': [
+        { name: 'Paneer Tikka', price: 150 },
+        { name: 'Veg Manchurian', price: 120 },
+        { name: 'Spring Roll', price: 100 }
+      ],
+      'nonveg-starters': [
+        { name: 'Chicken Pakora', price: 160 },
+        { name: 'Egg Devil', price: 90 },
+        { name: 'Fish Fry', price: 180 }
+      ],
+      'veg-main': [
+        { name: 'Paneer Butter Masala', price: 220 },
+        { name: 'Dal Makhani', price: 180 },
+        { name: 'Aloo Gobi', price: 150 }
+      ],
+      'chicken-main': [
+        { name: 'Butter Chicken', price: 260 },
+        { name: 'Chicken Curry', price: 230 },
+        { name: 'Reshmi Chicken Kabab', price: 270 },
+        { name: 'Chicken Rezala', price: 300 },
+        { name: 'Chicken Varta', price: 210 },
+        { name: 'Chicken Do Pyaza', price: 250 },
+        { name: 'Chicken Lababza', price: 300 },
+        { name: 'Chilli chicken', price: 250 },
+        { name: 'Garlic Butter Chicken ', price: 270 },
+        { name: 'Tanduri Chicken', price: 250 }
+      ],
+      'fish-main': [
+        { name: 'Fish Curry', price: 240 },
+        { name: 'Fish Kabirazi', price: 150 },
+        { name: 'Fish Masala', price: 270 }
+      ],
+      'egg-main': [
+        { name: 'Egg Fry', price: 240 },
+        { name: 'Egg Curry', price: 150 },
+        { name: 'Egg ', price: 270 }
+      ],
+      'desserts': [
+        { name: 'Gulab Jamun', price: 80 },
+        { name: 'Rasgulla', price: 90 },
+        { name: 'Ice Cream', price: 100 }
+      ]
+    };
+    
+
+    for (const category in menuData) {
+      const container = document.getElementById(category);
+      menuData[category].forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'menu-item';
+        div.innerHTML = `
+          <h4>${item.name}</h4>
+          <p class="price">₹${item.price}</p>`;
+        container.appendChild(div);
+      });
+    }
+</script>
+</html>
