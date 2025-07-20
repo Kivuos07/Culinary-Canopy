@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Culinary anopy</title>
+  <title>Culinary Canopy</title>
   <style>
     * {
       box-sizing: border-box;
@@ -94,9 +94,10 @@
 <body>
   <header>
     <h1><img src="gif files/restaurant.gif" width="333" align="left"></h1><p><h1 align="left">Culinary Canopy<img src="culinary.png" width="333" align="right"></h1></p>
-    <h2><marquee font-color="black">Welcome to the official Web-Menu of Culinary Canopy</marquee></h2></a>
+    <h2><marquee font-color="black">Welcome to the official Web-Menu of Culinary Canopy</marquee></h2>
   </header>
 
+  <!-- MENU SECTION -->
   <section class="category">
     <h2>Starters</h2>
     <div class="subcategory">
@@ -123,7 +124,7 @@
       <h3>Fish</h3>
       <div class="menu-grid" id="fish-main"></div>
     </div>
-     <div class="subcategory">
+    <div class="subcategory">
       <h3>Egg</h3>
       <div class="menu-grid" id="egg-main"></div>
     </div>
@@ -134,6 +135,7 @@
     <div class="menu-grid" id="desserts"></div>
   </section>
 
+  <!-- CART SECTION -->
   <section class="cart">
     <h3>🛒 Your Cart</h3>
     <div id="cart-items"></div>
@@ -144,10 +146,10 @@
       <input type="text" placeholder="Phone Number" required>
       <input type="text" placeholder="Delivery Address" required>
       <button class="order-btn" onclick="confirmOrder()">Confirm Order</button>
-
     </div>
   </section>
 
+  <!-- SCRIPT -->
   <script>
     const menuData = {
       'veg-starters': [
@@ -174,7 +176,7 @@
         { name: 'Chicken Do Pyaza', price: 250 },
         { name: 'Chicken Lababza', price: 300 },
         { name: 'Chilli chicken', price: 250 },
-        { name: 'Garlic Butter Chicken ', price: 270 },
+        { name: 'Garlic Butter Chicken', price: 270 },
         { name: 'Tanduri Chicken', price: 250 }
       ],
       'fish-main': [
@@ -185,7 +187,7 @@
       'egg-main': [
         { name: 'Egg Fry', price: 240 },
         { name: 'Egg Curry', price: 150 },
-        { name: 'Egg ', price: 270 }
+        { name: 'Egg', price: 270 }
       ],
       'desserts': [
         { name: 'Gulab Jamun', price: 80 },
@@ -194,8 +196,9 @@
       ]
     };
 
-    const cart = [];
+    const cart = {};
 
+    // Populate menu
     for (const category in menuData) {
       const container = document.getElementById(category);
       menuData[category].forEach(item => {
@@ -204,15 +207,39 @@
         div.innerHTML = `
           <h4>${item.name}</h4>
           <p class="price">₹${item.price}</p>
-          <button class="add-btn" onclick='addToCart("${item.name}", ${item.price})'>Add +</button>
+          <button class="add-btn" id="btn-${item.name}" onclick='addToCart("${item.name}", ${item.price})'>Add +</button>
         `;
         container.appendChild(div);
       });
     }
 
     function addToCart(name, price) {
-      cart.push({ name, price });
+      if (!cart[name]) {
+        cart[name] = { price: price, quantity: 1 };
+      } else {
+        cart[name].quantity += 1;
+      }
+      updateAddButton(name);
       renderCart();
+    }
+
+    function removeFromCart(name) {
+      if (cart[name]) {
+        cart[name].quantity -= 1;
+        if (cart[name].quantity <= 0) {
+          delete cart[name];
+        }
+        updateAddButton(name);
+        renderCart();
+      }
+    }
+
+    function updateAddButton(name) {
+      const btn = document.getElementById(`btn-${name}`);
+      if (btn) {
+        const qty = cart[name] ? cart[name].quantity : 0;
+        btn.innerText = `Add + (${qty})`;
+      }
     }
 
     function renderCart() {
@@ -220,24 +247,32 @@
       const total = document.getElementById('total');
       container.innerHTML = '';
       let sum = 0;
-      cart.forEach(item => {
+
+      for (const name in cart) {
+        const item = cart[name];
         const div = document.createElement('div');
         div.className = 'cart-item';
-        div.innerHTML = `<span>${item.name}</span><span>₹${item.price}</span>`;
+        div.innerHTML = `
+          <span>${name} (x${item.quantity})</span>
+          <span>₹${item.price * item.quantity}</span>
+          <button onclick='removeFromCart("${name}")'>➖</button>
+          <button onclick='addToCart("${name}", ${item.price})'>➕</button>
+        `;
         container.appendChild(div);
-        sum += item.price;
-      });
+        sum += item.price * item.quantity;
+      }
+
       total.innerText = sum;
     }
 
     function showOrderForm() {
       document.getElementById('order-form').style.display = 'block';
     }
+
     function confirmOrder() {
       alert("Your order has been placed successfully!");
-    window.location.href = "thankyou.html"; 
+      window.location.href = "thankyou.html";
     }
-
   </script>
 </body>
 </html>
