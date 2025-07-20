@@ -93,7 +93,7 @@
 </head>
 <body>
   <header>
-    <h1><img src="images/restaurant.gif" width="333" align="left"></h1><p><h1 align="left">Culinary Canopy<img src="culinary.png" width="333" align="right"></h1></p>
+    <h1><img src="gif files/restaurant.gif" width="333" align="left"></h1><p><h1 align="left">Culinary Canopy<img src="culinary.png" width="333" align="right"></h1></p>
     <h2><marquee font-color="black">Welcome to the official Web-Menu of Culinary Canopy</marquee></h2></a>
   </header>
 
@@ -143,7 +143,8 @@
       <input type="text" placeholder="Your Name" required>
       <input type="text" placeholder="Phone Number" required>
       <input type="text" placeholder="Delivery Address" required>
-      <button class="order-btn">Confirm Order</button>
+      <button class="order-btn" onclick="confirmOrder()">Confirm Order</button>
+
     </div>
   </section>
 
@@ -232,6 +233,11 @@
     function showOrderForm() {
       document.getElementById('order-form').style.display = 'block';
     }
+    function confirmOrder() {
+      alert("Your order has been placed successfully!");
+    window.location.href = "thankyou.html"; 
+    }
+
   </script>
 </body>
 </html>
