@@ -275,30 +275,43 @@
       document.getElementById('order-form').style.display = 'block';
     }
 
-    function confirmOrder() {
-  const name = document.querySelector('.order-form input[placeholder="Your Name"]').value;
-  const phone = document.querySelector('.order-form input[placeholder="Phone Number"]').value;
-  const address = document.querySelector('.order-form input[placeholder="Delivery Address"]').value;
+  function confirmOrder() {
+  const name = document.querySelector('.order-form input[placeholder="Your Name"]').value.trim();
+  const phone = document.querySelector('.order-form input[placeholder="Phone Number"]').value.trim();
+  const address = document.querySelector('.order-form input[placeholder="Delivery Address"]').value.trim();
 
-  let orderMessage = `🛒 *New Order Received from Culinary Canopy*\n\n👤 Name: ${name}\n📱 Phone: ${phone}\n🏠 Address: ${address}\n\n🧾 *Order Details:*\n`;
+  if (!name || !phone || !address) {
+    alert("Please fill in all the details before confirming.");
+    return;
+  }
+
+
+  let message = `New Order from Culinary Canopy%0A`;
+  message += `Name: ${name}%0APhone: ${phone}%0AAddress: ${address}%0A%0AOrder Details:%0A`;
 
   for (const item in cart) {
-    orderMessage += `- ${item} x ${cart[item].quantity} = ₹${cart[item].quantity * cart[item].price}\n`;
+    const quantity = cart[item].quantity;
+    const price = cart[item].price;
+    message += `${item} x${quantity} = ₹${quantity * price}%0A`;
   }
 
   let total = Object.values(cart).reduce((sum, item) => sum + item.price * item.quantity, 0);
-  orderMessage += `\n💰 *Total: ₹${total}*`;
+  message += `%0ATotal: ₹${total}`;
+
+
+  const restaurantPhone = "8927977589";
+  const smsURL = `sms:${restaurantPhone}?body=${message}`;
 
   
-  const encodedMessage = encodeURIComponent(orderMessage);
+  window.open(smsURL, "_blank");
 
- 
-  const whatsappNumber = "918927977589";
-  const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
- 
-  window.open(whatsappURL, '_blank');
+  setTimeout(() => {
+    alert("Your order has been placed successfully!");
+    window.location.href = "thankyou.html";
+  }, 2000);
 }
+
 
   </script>
 </body>
