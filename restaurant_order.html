@@ -41,8 +41,14 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       position: relative;
     }
+    .menu-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px 8px 0 0;
+    }
     .menu-item h4 {
-      margin: 0 0 5px;
+      margin: 8px 0 5px;
     }
     .price {
       color: #e67e22;
@@ -103,9 +109,9 @@
 </head>
 <body>
   <header>
-    <h1><img src="images/restaurant.gif" width="333" align="left"></h1>
+    <h1><img src="gif files/restaurant.gif" width="333" align="left"></h1>
     <p><h1 align="left">Culinary Canopy<img src="culinary.png" width="333" align="right"></h1></p>
-    <h2><marquee font-color="black">Welcome to the official Web-Menu of Culinary Canopy</marquee></h2>
+    <h2><marquee>Welcome to the official Web-Menu of Culinary Canopy</marquee></h2>
   </header>
 
   <section class="category">
@@ -161,46 +167,46 @@
   <script>
     const menuData = {
       'veg-starters': [
-        { name: 'Paneer Tikka', price: 150 },
-        { name: 'Veg Manchurian', price: 120 },
-        { name: 'Spring Roll', price: 100 }
+        { name: 'Paneer Tikka', price: 150, img: 'paneer_tikka.jpg' },
+        { name: 'Veg Manchurian', price: 120, img: 'veg_manchurian.jpg' },
+        { name: 'Spring Roll', price: 100, img: 'spring_roll.jpg' }
       ],
       'nonveg-starters': [
-        { name: 'Chicken Pakora', price: 160 },
-        { name: 'Egg Devil', price: 90 },
-        { name: 'Fish Fry', price: 180 }
+        { name: 'Chicken Pakora', price: 160, img: 'chicken_pakora.jpg' },
+        { name: 'Egg Devil', price: 90, img: 'egg_devil.jpg' },
+        { name: 'Fish Fry', price: 180, img: 'fish_fry.jpg' }
       ],
       'veg-main': [
-        { name: 'Paneer Butter Masala', price: 220 },
-        { name: 'Dal Makhani', price: 180 },
-        { name: 'Aloo Gobi', price: 150 }
+        { name: 'Paneer Butter Masala', price: 220, img: 'paneer_butter_masala.jpg' },
+        { name: 'Dal Makhani', price: 180, img: 'dal_makhani.jpg' },
+        { name: 'Aloo Gobi', price: 150, img: 'aloo_gobi.jpg' }
       ],
       'chicken-main': [
-        { name: 'Butter Chicken', price: 260 },
-        { name: 'Chicken Curry', price: 230 },
-        { name: 'Reshmi Chicken Kabab', price: 270 },
-        { name: 'Chicken Rezala', price: 300 },
-        { name: 'Chicken Varta', price: 210 },
-        { name: 'Chicken Do Pyaza', price: 250 },
-        { name: 'Chicken Lababza', price: 300 },
-        { name: 'Chilli chicken', price: 250 },
-        { name: 'Garlic Butter Chicken', price: 270 },
-        { name: 'Tanduri Chicken', price: 250 }
+        { name: 'Butter Chicken', price: 260, img: 'butter_chicken.jpg' },
+        { name: 'Chicken Curry', price: 230, img: 'chicken_curry.jpg' },
+        { name: 'Reshmi Chicken Kabab', price: 270, img: 'chicken_reshmi_kabab.jpg' },
+        { name: 'Chicken Rezala', price: 300, img: 'chicken_rezala.jpg' },
+        { name: 'Chicken Varta', price: 210, img: 'chicken_varta.jpg' },
+        { name: 'Chicken Do Pyaza', price: 250, img: 'chicken_dopyaza.jpg' },
+        { name: 'Chicken Lababza', price: 300, img: 'chicken_lababza.jpg' },
+        { name: 'Chilli chicken', price: 250, img: 'chilli_chicken.jpg' },
+        { name: 'Garlic Butter Chicken', price: 270, img: 'garlic_butter_chicken.jpg' },
+        { name: 'Tanduri Chicken', price: 250, img: 'tandoori_chicken.jpg' }
       ],
       'fish-main': [
-        { name: 'Fish Curry', price: 240 },
-        { name: 'Fish Kabirazi', price: 150 },
-        { name: 'Fish Masala', price: 270 }
+        { name: 'Fish Curry', price: 240, img: 'fish_curry.jpg' },
+        { name: 'Fish Kabirazi', price: 150, img: 'fish_kabiraji.jpg' },
+        { name: 'Fish Masala', price: 270, img: 'fish_masala.jpg' }
       ],
       'egg-main': [
-        { name: 'Egg Fry', price: 240 },
-        { name: 'Egg Curry', price: 150 },
-        { name: 'Egg', price: 270 }
+        { name: 'Egg Fry', price: 240, img: 'egg_fry.jpg' },
+        { name: 'Egg Curry', price: 150, img: 'egg_curry.jpg' },
+        { name: 'Egg', price: 270, img: 'boiled_egg.jpg' }
       ],
       'desserts': [
-        { name: 'Gulab Jamun', price: 80 },
-        { name: 'Rasgulla', price: 90 },
-        { name: 'Ice Cream', price: 100 }
+        { name: 'Gulab Jamun', price: 80, img: 'gulab_jamun.jpg' },
+        { name: 'Rasgulla', price: 90, img: 'rasgulla.jpg' },
+        { name: 'Ice Cream', price: 100, img: 'ice_cream.jpg' }
       ]
     };
 
@@ -211,6 +217,7 @@
         const div = document.createElement('div');
         div.className = 'menu-item';
         div.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
           <h4>${item.name}</h4>
           <p class="price">₹${item.price}</p>
           <button class="add-btn" id="btn-${item.name}" onclick='addToCart("${item.name}", ${item.price})'>Add +</button>
@@ -275,44 +282,38 @@
       document.getElementById('order-form').style.display = 'block';
     }
 
-  function confirmOrder() {
-  const name = document.querySelector('.order-form input[placeholder="Your Name"]').value.trim();
-  const phone = document.querySelector('.order-form input[placeholder="Phone Number"]').value.trim();
-  const address = document.querySelector('.order-form input[placeholder="Delivery Address"]').value.trim();
+    function confirmOrder() {
+      const name = document.querySelector('.order-form input[placeholder="Your Name"]').value.trim();
+      const phone = document.querySelector('.order-form input[placeholder="Phone Number"]').value.trim();
+      const address = document.querySelector('.order-form input[placeholder="Delivery Address"]').value.trim();
 
-  if (!name || !phone || !address) {
-    alert("Please fill in all the details before confirming.");
-    return;
-  }
+      if (!name || !phone || !address) {
+        alert("Please fill in all the details before confirming.");
+        return;
+      }
 
+      let message = `New Order from Culinary Canopy%0A`;
+      message += `Name: ${name}%0APhone: ${phone}%0AAddress: ${address}%0A%0AOrder Details:%0A`;
 
-  let message = `New Order from Culinary Canopy%0A`;
-  message += `Name: ${name}%0APhone: ${phone}%0AAddress: ${address}%0A%0AOrder Details:%0A`;
+      for (const item in cart) {
+        const quantity = cart[item].quantity;
+        const price = cart[item].price;
+        message += `${item} x${quantity} = ₹${quantity * price}%0A`;
+      }
 
-  for (const item in cart) {
-    const quantity = cart[item].quantity;
-    const price = cart[item].price;
-    message += `${item} x${quantity} = ₹${quantity * price}%0A`;
-  }
+      let total = Object.values(cart).reduce((sum, item) => sum + item.price * item.quantity, 0);
+      message += `%0ATotal: ₹${total}`;
 
-  let total = Object.values(cart).reduce((sum, item) => sum + item.price * item.quantity, 0);
-  message += `%0ATotal: ₹${total}`;
+      const restaurantPhone = "8927977589";
+      const smsURL = `sms:${restaurantPhone}?body=${message}`;
 
+      window.open(smsURL, "_blank");
 
-  const restaurantPhone = "8927977589";
-  const smsURL = `sms:${restaurantPhone}?body=${message}`;
-
-  
-  window.open(smsURL, "_blank");
-
-
-  setTimeout(() => {
-    alert("Your order has been placed successfully!");
-    window.location.href = "thankyou.html";
-  }, 2000);
-}
-
-
+      setTimeout(() => {
+        alert("Your order has been placed successfully!");
+        window.location.href = "thankyou.html";
+      }, 2000);
+    }
   </script>
 </body>
 </html>
